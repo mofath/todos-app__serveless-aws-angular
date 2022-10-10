@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <span class="pull-right"><button class="btn btn-default" (click)="onRefresh()">Refresh</button></span>
+  </div>
+</div>
+<div >
+  <table class="table table-striped">
+    <tr><td>Name</td><td>Description</td><td>Id</td><td>Action</td></tr>
+    <tr *ngFor="let item of items">
+      <td><a [routerLink]="['/edit',item._id]">{{item.name}}</a></td>
+      <td>{{item.description}}</td>
+      <td>{{item._id}}</td>
+      <td><button >Delete</button></td>
+    </tr>
+  </table>
+</div>

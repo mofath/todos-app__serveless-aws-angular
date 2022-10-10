@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Todo Page</h1>
+  <ul class="nav nav-tabs">
+    <li role="presentation">
+      <a routerLink="/todolist" routerLinkActive="active">Home</a>
+    </li>
+    <li role="presentation">
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+    </li>
+    <div class="row">
+      <div class="col-md-12" style="margin-top: 10px">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </ul>
+</div>
