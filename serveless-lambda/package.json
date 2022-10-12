@@ -5,14 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "lambda-local -l ./cognito/signup.js -e ./data/signupRequest.json",
-    "getlist": "lambda-local -l app.js -e ./data/getListRequest.json -E '{\"action\":\"GetTodoList\"}'",
-    "add": "lambda-local -l app.js -e ./data/addRequest.json -E '{\"action\":\"AddTodo\"}'",
-    "update": "lambda-local -l app.js -e ./data/updateRequest.json -E '{\"action\":\"UpdateTodo\"}'",
-    "get": "lambda-local -l app.js -e ./data/getRequest.json -E '{\"action\":\"GetTodo\"}'",
-    "delete": "lambda-local -l app.js -e ./data/deleteRequest.json -E '{\"action\":\"DeleteTodo\"}'",
-    "zip:handlers": "zip -r archive-handlers.zip node_modules/ libs/ handlers/ app.js package.json",
-    "zip:signup": "zip -r archive-signup.zip node_modules/ libs/ cognito/signup.js app.js package.json"
+    "deploy:dev": "sh deploy.sh dev",
+    "deploy:prod": "sh deploy.sh prod"
   },
   "keywords": [],
   "author": "",

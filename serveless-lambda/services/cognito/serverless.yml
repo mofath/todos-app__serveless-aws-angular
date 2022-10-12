@@ -1,0 +1,34 @@
+service: todoapp-congnito-service
+
+frameworkVersion: "3"
+
+configValidationMode: error
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs14.x
+
+package:
+  individually: true
+
+layers:
+  nodeModules:
+    path: ./layers
+    name: nodeModules
+    description: "node_modules dependencies"
+    compatibleRuntimes:
+      - nodejs14.x
+
+functions:
+  Signup:
+    handler: src/handlers/signup
+    package:
+      individually: true
+    layers:
+      - { Ref: NodeModulesLambdaLayer }
+    events:
+      - httpApi:
+          path: /auth/signup
+          method: post
+  

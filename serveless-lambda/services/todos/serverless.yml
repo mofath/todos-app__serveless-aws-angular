@@ -1,0 +1,92 @@
+service: todoapp-todos-service
+
+frameworkVersion: "3"
+
+configValidationMode: error
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs14.x
+
+package:
+  individually: true
+
+layers:
+  nodeModules:
+    path: ./layers
+    name: nodeModules
+    description: "node_modules dependencies"
+    compatibleRuntimes:
+      - nodejs14.x
+
+functions:
+  ListTodos:
+    handler: src/handlers/GetTodoList
+    package:
+      individually: true
+      include:
+      - shared/**
+      - models/**
+    layers:
+      - { Ref: NodeModulesLambdaLayer }
+    events:
+      - httpApi:
+          path: /todos
+          method: get
+  
+  GetTodo:
+    handler: src/handlers/GetTodo
+    package:
+      individually: true
+      include:
+      - shared/**
+      - models/**
+    layers:
+      - { Ref: NodeModulesLambdaLayer }
+    events:
+      - httpApi:
+          path: /todos/{id}
+          method: post
+  
+  AddTodo:
+    handler: src/handlers/AddTodo
+    package:
+      individually: true
+      include:
+      - shared/**
+      - models/**
+    layers:
+      - { Ref: NodeModulesLambdaLayer }
+    events:
+      - httpApi:
+          path: /todos
+          method: post
+  
+  UpdateTodo:
+    handler: src/handlers/AddTodo
+    package:
+      individually: true
+      include:
+      - shared/**
+      - models/**
+    layers:
+      - { Ref: NodeModulesLambdaLayer }
+    events:
+      - httpApi:
+          path: /todos/{id}
+          method: put
+  
+  DeleteTodo:
+    handler: src/handlers/AddTodo
+    package:
+      individually: true
+      include:
+      - shared/**
+      - models/**
+    layers:
+      - { Ref: NodeModulesLambdaLayer }
+    events:
+      - httpApi:
+          path: /todos/{id}
+          method: delete
