@@ -1,23 +1,33 @@
 const { mongodb } = require("../shared");
+const { build_success, build_fail } = require("../shared/httpResponse");
 const Todo = require("../models/Todo");
 
 exports.handler = async (event, context, callback) => {
+  console.log("Add Todo item");
+
   let conn;
-  try {
-    conn = await mongodb();
 
-    await Todo.insertOne(event);
+  return new Promis(async (resolve) => {
+    try {
+      conn = await mongodb().catch((error) => {
+        console.log("Failed to connect to MongoDB");
+        throw error;
+      });
 
-    callback(null, { statusCode: 201, message: "insert completed" });
+      await Todo.insertOne(event).catch((error) => {
+        console.log("Failed to insert todo item");
+        throw error;
+      });
 
-    conn.disconnect();
-  } catch (error) {
-    console.log(error);
-    callback(null, {
-      statusCode: 500,
-      body: JSON.stringify({ msg: error }),
-    });
+      resolve(build_success({
+        message: "Successfully Added Todo item",
+      }, context.functionName));
 
-    conn.disconnect();
-  }
+      conn.disconnect();
+    } catch (error) {
+      console.log(error);
+      resolve(build_fail(error, context.functionName));
+      conn.disconnect();
+    }
+  });
 };

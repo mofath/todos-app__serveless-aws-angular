@@ -1,7 +1,8 @@
 const mongodb = require("./mongodb");
-const { validateUser } = require("./validators");
+const { build_success, build_fail } = require("./httpResponse");
 
 module.exports = {
   mongodb,
-  validateUser,
+  build_success,
+  build_fail,
 };

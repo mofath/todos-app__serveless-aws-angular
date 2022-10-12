@@ -29,7 +29,14 @@ module.exports.handler = async (event, context, callback) => {
       TemporaryPassword: "12345678",
       MessageAction: "SUPPRESS",
     };
-    const { User } = await userPool.adminCreateUser(createUserParams).promise();
+    const { User } = await userPool
+      .adminCreateUser(createUserParams)
+      .promise()
+      .catch((error) => {
+        console.log("Failed to create new user");
+        throw error;
+      });
+
     console.log("User created", User.Username);
 
     // confirm reset password
@@ -41,7 +48,13 @@ module.exports.handler = async (event, context, callback) => {
         Permanent: true,
       };
 
-      await userPool.adminSetUserPassword(setPasswordParams).promise();
+      await userPool
+        .adminSetUserPassword(setPasswordParams)
+        .promise()
+        .catch((error) => {
+          console.log("Failed to set user password");
+          throw error;
+        });
     }
 
     return callback(null, {

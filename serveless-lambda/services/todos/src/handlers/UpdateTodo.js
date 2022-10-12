@@ -1,34 +1,43 @@
 const { mongodb } = require("../shared");
+const { build_success, build_fail } = require("../shared/httpResponse");
 const Todo = require("../models/Todo");
 
 exports.handler = async (event, context, callback) => {
+  console.log("Update Todo item");
+
   let conn;
-  try {
-    conn = await mongodb();
 
-    const id = ObjectId(event["queryStringParameters"]["id"]);
-    await Todo.deleteOne({ _id: id });
+  return new Promis(async (resolve) => {
+    try {
+      conn = await mongodb().catch((error) => {
+        console.log("Failed to connect to MongoDB");
+        throw error;
+      });
 
-    var todo = {
-      name: event.name,
-      description: event.description,
-    };
+      const id = ObjectId(event["queryStringParameters"]["id"]);
 
-    const doc = await Todo.findOneAndUpdate({ _id: id }, { $set: todo });
+      var todo = {
+        name: event.name,
+        description: event.description,
+      };
 
-    callback(null, {
-      statusCode: 200,
-      item: doc,
-    });
+      const doc = await Todo.findOneAndUpdate(
+        { _id: id },
+        { $set: todo }
+      ).catch((error) => {
+        console.log(`Failed to upate todo Todo item with ${id}`);
+        throw error;
+      });
 
-    conn.disconnect();
-  } catch (error) {
-    console.log(error);
-    callback(null, {
-      statusCode: 500,
-      body: JSON.stringify({ msg: error }),
-    });
+      resolve(build_success({
+        message: "Successfully updated Todo item",
+      }, context.functionName));
 
-    conn.disconnect();
-  }
+      conn.disconnect();
+    } catch (error) {
+      console.log(error);
+      resolve(build_fail(error, context.functionName));
+      conn.disconnect();
+    }
+  });
 };
