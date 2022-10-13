@@ -189,7 +189,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/todoapp-congnito-service/dev/1665551684483-2022-10-12T05:14:44.483Z/Signup.zip"
+                "S3Key": "serverless/todoapp-congnito-service/dev/1665644986408-2022-10-13T07:09:46.408Z/Signup.zip"
               },
               "Handler": "src/handlers/signup",
               "Runtime": "nodejs14.x",
@@ -212,14 +212,14 @@
               "SignupLogGroup"
             ]
           },
-          "SignupLambdaVersion2hT6wHXdgy5xFkE262XJwGTHykZ4dY8PApTzRSw": {
+          "SignupLambdaVersioneaUWkRjYCrPvvckBRupoeQna34MI0jHvPssmvyq39I": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SignupLambdaFunction"
               },
-              "CodeSha256": "TGoLaSF944Gr64IH9eC8+dzdUR3n13rynJ3FBcjpDBQ="
+              "CodeSha256": "tbgTbU8O+iGokYlJEsjQmWoo6waVDFYJUBSUOtPktL0="
             }
           },
           "HttpApi": {
@@ -350,7 +350,7 @@
           "SignupLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SignupLambdaVersion2hT6wHXdgy5xFkE262XJwGTHykZ4dY8PApTzRSw"
+              "Ref": "SignupLambdaVersioneaUWkRjYCrPvvckBRupoeQna34MI0jHvPssmvyq39I"
             },
             "Export": {
               "Name": "sls-todoapp-congnito-service-dev-SignupLambdaFunctionQualifiedArn"
@@ -482,7 +482,7 @@
         "handler": "src/handlers/signup",
         "package": {
           "individually": true,
-          "artifact": "/home/mhmd/github/todos-app__serveless-lambda-angular/serveless-lambda/services/cognito/.serverless/Signup.zip"
+          "artifact": "/home/mhmd/github/todos-app__serveless-lambda-angular/api/services/cognito/.serverless/Signup.zip"
         },
         "layers": {
           "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"SignupLambdaFunction\"][\"Properties\"][\"Layers\"]"
@@ -502,7 +502,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "SignupLambdaVersion2hT6wHXdgy5xFkE262XJwGTHykZ4dY8PApTzRSw"
+        "versionLogicalId": "SignupLambdaVersioneaUWkRjYCrPvvckBRupoeQna34MI0jHvPssmvyq39I"
       }
     },
     "configValidationMode": "error",
@@ -517,7 +517,7 @@
       "package": {
         "individually": true,
         "artifactsS3KeyDirname": "serverless/todoapp-congnito-service/dev/code-artifacts",
-        "artifactDirectoryName": "serverless/todoapp-congnito-service/dev/1665551684483-2022-10-12T05:14:44.483Z"
+        "artifactDirectoryName": "serverless/todoapp-congnito-service/dev/1665644986408-2022-10-13T07:09:46.408Z"
       },
       "layers": {
         "nodeModules": {
@@ -528,8 +528,9 @@
             "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"NodeModulesLambdaLayer\"][\"Properties\"][\"CompatibleRuntimes\"]"
           },
           "package": {
-            "artifact": "/home/mhmd/github/todos-app__serveless-lambda-angular/serveless-lambda/services/cognito/.serverless/nodeModules.zip"
-          }
+            "artifact": "/home/mhmd/github/todos-app__serveless-lambda-angular/api/services/cognito/.serverless/nodeModules.zip"
+          },
+          "artifactAlreadyUploaded": true
         }
       },
       "functions": {
@@ -543,7 +544,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/todoapp-congnito-service/dev/1665551684483-2022-10-12T05:14:44.483Z",
+    "artifactDirectoryName": "serverless/todoapp-congnito-service/dev/1665644986408-2022-10-13T07:09:46.408Z",
     "artifact": ""
   }
 }

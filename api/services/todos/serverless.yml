@@ -22,7 +22,7 @@ layers:
 
 functions:
   ListTodos:
-    handler: src/handlers/GetTodoList
+    handler: handler.listTodos
     package:
       individually: true
       include:
@@ -36,7 +36,7 @@ functions:
           method: get
   
   GetTodo:
-    handler: src/handlers/GetTodo
+    handler: handler.getTodo
     package:
       individually: true
       include:
@@ -50,7 +50,7 @@ functions:
           method: post
   
   AddTodo:
-    handler: src/handlers/AddTodo
+    handler: handler.addTodo
     package:
       individually: true
       include:
@@ -64,7 +64,7 @@ functions:
           method: post
   
   UpdateTodo:
-    handler: src/handlers/AddTodo
+    handler: handler.updateTodo
     package:
       individually: true
       include:
@@ -78,7 +78,7 @@ functions:
           method: put
   
   DeleteTodo:
-    handler: src/handlers/AddTodo
+    handler: handler.deleteTodo
     package:
       individually: true
       include:

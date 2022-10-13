@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1226.0",
-    "mongoose": "^6.6.2",
+    "mongoose": "^6.6.5",
     "zod": "^3.19.1"
   }
 }
